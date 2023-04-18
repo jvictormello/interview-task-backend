@@ -2,8 +2,8 @@
 
 namespace App\Infrastructure\Providers;
 
-use App\Modules\Invoices\Repositories\InvoiceRepositoryContract;
-use App\Modules\Invoices\Repositories\InvoiceRepositoryEloquent;
+use App\Repositories\InvoiceRepositoryContract;
+use App\Repositories\InvoiceRepositoryEloquent;
 use Illuminate\Support\ServiceProvider;
 
 class InvoiceRepositoryServiceProvider extends ServiceProvider
