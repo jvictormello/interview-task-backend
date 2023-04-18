@@ -5,10 +5,8 @@ namespace App\Modules\Approval\Infrastructure\Http\Controllers;
 use App\Infrastructure\Controller;
 use App\Services\InvoiceServiceContract;
 use Exception;
-use Illuminate\Http\Request;
 use Illuminate\Support\ItemNotFoundException;
 use LogicException;
-use Ramsey\Uuid\UuidInterface;
 use Symfony\Component\HttpFoundation\Response;
 
 class ApprovalController extends Controller
