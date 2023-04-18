@@ -5,10 +5,8 @@ namespace App\Services;
 use App\Infrastructure\Models\Invoice;
 use App\Modules\Approval\Api\ApprovalFacadeInterface;
 use App\Modules\Approval\Api\Dto\ApprovalDto;
-use App\Modules\Approval\Application\ApprovalFacade;
 use App\Repositories\InvoiceRepositoryContract;
 use Ramsey\Uuid\Uuid;
-use Ramsey\Uuid\UuidInterface;
 
 class InvoiceService implements InvoiceServiceContract
 {
