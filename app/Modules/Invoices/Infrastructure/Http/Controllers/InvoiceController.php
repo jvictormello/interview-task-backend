@@ -5,7 +5,6 @@ namespace App\Modules\Invoices\Infrastructure\Http\Controllers;
 use App\Infrastructure\Controller;
 use App\Services\InvoiceServiceContract;
 use Exception;
-use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 class InvoiceController extends Controller
