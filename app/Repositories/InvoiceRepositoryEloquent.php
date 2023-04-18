@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Modules\Invoices\Repositories;
+namespace App\Repositories;
 
 use App\Infrastructure\Models\Invoice;
 use App\Infrastructure\Repositories\BaseRepositoryEloquent;

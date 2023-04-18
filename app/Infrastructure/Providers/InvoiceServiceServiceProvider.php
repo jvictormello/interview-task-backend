@@ -2,8 +2,8 @@
 
 namespace App\Infrastructure\Providers;
 
-use App\Modules\Invoices\Services\InvoiceService;
-use App\Modules\Invoices\Services\InvoiceServiceContract;
+use App\Services\InvoiceService;
+use App\Services\InvoiceServiceContract;
 use Illuminate\Support\ServiceProvider;
 
 class InvoiceServiceServiceProvider extends ServiceProvider
