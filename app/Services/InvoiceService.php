@@ -37,4 +37,13 @@ class InvoiceService implements InvoiceServiceContract
 
         $this->approvalFacade->approve($invoiceDto);
     }
+
+    public function rejectInvoice(string $id)
+    {
+        $invoice = $this->invoiceRepository->getByAttribute('id', $id)->firstOrFail();
+        $castId = Uuid::fromString($id);
+        $invoiceDto = new ApprovalDto($castId, $invoice->status, $invoice->company->name);
+
+        $this->approvalFacade->reject($invoiceDto);
+    }
 }
