@@ -33,7 +33,8 @@ class ApprovalController extends Controller
         } catch (ItemNotFoundException $exception) {
             return response()->json(['message' => $exception->getMessage()], $exception->getCode());
         } catch (LogicException $exception) {
-            return response()->json(['message' => $exception->getMessage()], $exception->getCode());
+            $errorCode = $exception->getCode() ? $exception->getCode() : Response::HTTP_METHOD_NOT_ALLOWED;
+            return response()->json(['message' => $exception->getMessage()], $errorCode);
         } catch (Exception $exception) {
             $errorCode = $exception->getCode() ? $exception->getCode() : Response::HTTP_INTERNAL_SERVER_ERROR;
             return response()->json(['message' => $exception->getMessage()], $errorCode);
@@ -53,7 +54,8 @@ class ApprovalController extends Controller
         } catch (ItemNotFoundException $exception) {
             return response()->json(['message' => $exception->getMessage()], $exception->getCode());
         } catch (LogicException $exception) {
-            return response()->json(['message' => $exception->getMessage()], $exception->getCode());
+            $errorCode = $exception->getCode() ? $exception->getCode() : Response::HTTP_METHOD_NOT_ALLOWED;
+            return response()->json(['message' => $exception->getMessage()], $errorCode);
         } catch (Exception $exception) {
             $errorCode = $exception->getCode() ? $exception->getCode() : Response::HTTP_INTERNAL_SERVER_ERROR;
             return response()->json(['message' => $exception->getMessage()], $errorCode);
