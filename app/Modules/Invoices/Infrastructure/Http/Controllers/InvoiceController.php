@@ -3,8 +3,10 @@
 namespace App\Modules\Invoices\Infrastructure\Http\Controllers;
 
 use App\Infrastructure\Controller;
-use App\Modules\Invoices\Services\InvoiceServiceContract;
+use App\Services\InvoiceServiceContract;
+use Exception;
 use Illuminate\Http\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class InvoiceController extends Controller
 {
@@ -22,7 +24,7 @@ class InvoiceController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
         try {
             return response()->json($this->invoiceService->getAllInvoices());
