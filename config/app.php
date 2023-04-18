@@ -196,6 +196,8 @@ return [
         // App\Infrastructure\Providers\BroadcastServiceProvider::class,
         App\Infrastructure\Providers\EventServiceProvider::class,
         App\Infrastructure\Providers\RouteServiceProvider::class,
+        App\Infrastructure\Providers\InvoiceRepositoryServiceProvider::class,
+        App\Infrastructure\Providers\InvoiceServiceServiceProvider::class,
 
         /*
          * Modules Service Providers
