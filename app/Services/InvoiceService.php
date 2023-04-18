@@ -6,7 +6,9 @@ use App\Infrastructure\Models\Invoice;
 use App\Modules\Approval\Api\ApprovalFacadeInterface;
 use App\Modules\Approval\Api\Dto\ApprovalDto;
 use App\Repositories\InvoiceRepositoryContract;
+use Exception;
 use Ramsey\Uuid\Uuid;
+use Symfony\Component\HttpFoundation\Response;
 
 class InvoiceService implements InvoiceServiceContract
 {
@@ -32,18 +34,24 @@ class InvoiceService implements InvoiceServiceContract
     public function approveInvoice(string $id)
     {
         $invoice = $this->invoiceRepository->getByAttribute('id', $id)->firstOrFail();
-        $castId = Uuid::fromString($id);
-        $invoiceDto = new ApprovalDto($castId, $invoice->status, $invoice->company->name);
+        $uuId = Uuid::fromString($id);
+        $invoiceDto = new ApprovalDto($uuId, $invoice->status, $invoice->company->name);
 
         $this->approvalFacade->approve($invoiceDto);
+
+        $this->invoiceRepository->approveInvoiceByUuid($uuId);
     }
 
     public function rejectInvoice(string $id)
     {
         $invoice = $this->invoiceRepository->getByAttribute('id', $id)->firstOrFail();
-        $castId = Uuid::fromString($id);
-        $invoiceDto = new ApprovalDto($castId, $invoice->status, $invoice->company->name);
+        $uuId = Uuid::fromString($id);
+        $invoiceDto = new ApprovalDto($uuId, $invoice->status, $invoice->company->name);
 
-        $this->approvalFacade->reject($invoiceDto);
+        if (!$this->approvalFacade->reject($invoiceDto)) {
+            throw new Exception('This invoice is not approvable', Response::HTTP_METHOD_NOT_ALLOWED);
+        }
+
+        $this->invoiceRepository->rejectInvoiceByUuid($uuId);
     }
 }
