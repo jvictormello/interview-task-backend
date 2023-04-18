@@ -28,11 +28,34 @@ class ApprovalController extends Controller
     public function approve(string $id)
     {
         try {
+            $this->invoiceService->approveInvoice($id);
             return response()->json(['message' => 'Invoice approved'], Response::HTTP_OK);
         } catch (ItemNotFoundException $exception) {
             return response()->json(['message' => $exception->getMessage()], $exception->getCode());
         } catch (LogicException $exception) {
+            $errorCode = $exception->getCode() ? $exception->getCode() : Response::HTTP_METHOD_NOT_ALLOWED;
+            return response()->json(['message' => $exception->getMessage()], $errorCode);
+        } catch (Exception $exception) {
+            $errorCode = $exception->getCode() ? $exception->getCode() : Response::HTTP_INTERNAL_SERVER_ERROR;
+            return response()->json(['message' => $exception->getMessage()], $errorCode);
+        }
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function reject(string $id)
+    {
+        try {
+            $this->invoiceService->rejectInvoice($id);
+            return response()->json(['message' => 'Invoice rejected'], Response::HTTP_OK);
+        } catch (ItemNotFoundException $exception) {
             return response()->json(['message' => $exception->getMessage()], $exception->getCode());
+        } catch (LogicException $exception) {
+            $errorCode = $exception->getCode() ? $exception->getCode() : Response::HTTP_METHOD_NOT_ALLOWED;
+            return response()->json(['message' => $exception->getMessage()], $errorCode);
         } catch (Exception $exception) {
             $errorCode = $exception->getCode() ? $exception->getCode() : Response::HTTP_INTERNAL_SERVER_ERROR;
             return response()->json(['message' => $exception->getMessage()], $errorCode);

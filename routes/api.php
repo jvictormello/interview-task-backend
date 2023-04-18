@@ -18,6 +18,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/invoices', [InvoiceController::class, 'index']);
 Route::put('/invoices/{id}/approve', [ApprovalController::class, 'approve']);
+Route::put('/invoices/{id}/reject', [ApprovalController::class, 'reject']);
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
